@@ -1,6 +1,8 @@
 from django.urls import path
-from sistema.views import index
+from sistema.views import index , funcionarios, empresas
 
 urlpatterns = [
-  path('', index)
+  path('', index, name='mysite'),
+  path('funcionarios/', funcionarios, name='funcionarios'),
+  path('empresas/', empresas, name='empresas')
 ]
