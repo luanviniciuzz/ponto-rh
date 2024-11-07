@@ -5,7 +5,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="col-md-4">
-    <form action="{% url 'update' emp.id%}" method="post">
+    <form action="{% url 'update_empresa' emp.id%}" method="post">
         {% csrf_token %}
         <div class="modal-header">						
             <h4 class="modal-title">Atualizar empresa</h4>
