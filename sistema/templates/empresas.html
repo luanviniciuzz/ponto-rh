@@ -56,7 +56,7 @@
                         <td>{{i.endereco}}</td>
 						<td>{{i.telefone}}</td>
                         <td>
-                            <a href="{% url 'editar' i.id %}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="{% url 'editar_empresa' i.id %}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="{% url 'deletar_empresa' i.id %}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>

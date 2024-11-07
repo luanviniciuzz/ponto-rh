@@ -1,6 +1,6 @@
 from django.urls import path
-from sistema.views import index, funcionarios, adicionar_empresa, empresas, pagina_adicionar_empresa, deletar_empresa, editar, update
-
+from sistema.views import index, adicionar_empresa, empresas, pagina_adicionar_empresa, deletar_empresa, editar_empresa, update_empresa
+from sistema.views import funcionarios, pagina_adicionar_funcionario, adicionar_funcionario, deletar_funcionario, update_funcionario, editar_funcionario
 urlpatterns = [
     path('', index, name='mysite'),
     ## MODULO EMPRESAS
@@ -8,9 +8,14 @@ urlpatterns = [
     path('empresas/adicionar/', pagina_adicionar_empresa, name='pagina_adicionar_empresa'),
     path('adicionar_empresa/', adicionar_empresa, name='adicionar_empresa'),
     path('deletar_empresa/<int:id>', deletar_empresa, name='deletar_empresa'),
-    path('editar/empresa/<int:id>', editar, name='editar'),
-    path('update/<int:id>', update, name='update'),
+    path('editar/empresa/<int:id>', editar_empresa, name='editar_empresa'),
+    path('update/empresa/<int:id>', update_empresa, name='update_empresa'),
     ## MODULO FUNCIONARIOS
     path('funcionarios/', funcionarios, name='funcionarios'),
-    
+    path('funcionario/adicionar/', pagina_adicionar_funcionario, name='pagina_adicionar_funcionario'),
+    path('adicionar_funcionario/', adicionar_funcionario, name='adicionar_funcionario'),
+    path('deletar_funcionario/<int:id>', deletar_funcionario, name='deletar_funcionario'),
+    path('editar/funcionario/<int:id>', editar_funcionario, name='editar_funcionario'),
+    path('update/funcionario/<int:id>', update_funcionario, name='update_funcionario'),
+
 ]

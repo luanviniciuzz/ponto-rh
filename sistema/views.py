@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Empresa
+from .models import Empresa, Funcionario
 
 def index(request):
     return render(request, 'index.html')
@@ -9,7 +9,7 @@ def empresas(request):
     context = {
         'emp': empresas
     }
-    return render(request, 'empresas.html', context)
+    return render(request,'empresas.html' , context)
 
 def adicionar_empresa(request):
     if request.method == "POST":
@@ -17,14 +17,12 @@ def adicionar_empresa(request):
         telefone = request.POST.get('telefone')
         endereco = request.POST.get('endereco')
         
-        # Cria a nova empresa
         Empresa.objects.create(
             nome=nome,
             telefone=telefone,
             endereco=endereco
         )
         
-        # Redireciona para a página de empresas
         return redirect('empresas')
 
 def deletar_empresa(request, id):
@@ -32,14 +30,14 @@ def deletar_empresa(request, id):
     empresa.delete()
     return redirect('empresas')
 
-def editar(request, id):
+def editar_empresa(request, id):
     empresa = Empresa.objects.get(id=id)
     context = {
         'emp': empresa
     }
     return render(request, 'update_empresa.html', context)
 
-def update(request, id):
+def update_empresa(request, id):
     if request.method == "POST":
         nome = request.POST.get('nome')
         telefone = request.POST.get('telefone')
@@ -51,11 +49,68 @@ def update(request, id):
         empresa.endereco = endereco
 
         empresa.save()
-        # Redireciona para a página de empresas
         return redirect('empresas')
 
 def pagina_adicionar_empresa(request):
     return render(request, 'add_empresa.html')
 
+## ------------------------------------------------------------
+
 def funcionarios(request):
-    return render(request, 'funcionarios.html')
+    funcionarios = Funcionario.objects.all()
+    context = {
+        'func': funcionarios
+    }
+    return render(request, 'funcionarios.html', context)
+
+def adicionar_funcionario(request):
+    if request.method == "POST":
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        empresa_id = request.POST.get('empresa')
+        empresa = Empresa.objects.get(id=empresa_id)
+
+        Funcionario.objects.create(
+            nome=nome,
+            email=email,
+            empresa=empresa
+        )
+
+        return redirect('funcionarios')
+
+def deletar_funcionario(request, id):
+    funcionario = Funcionario.objects.get(id=id)
+    funcionario.delete()
+    return redirect('funcionarios')
+
+def editar_funcionario(request, id):
+    funcionario = Funcionario.objects.get(id=id)
+    empresa = Empresa.objects.all()
+    context = {
+        'func': funcionario,
+        'emp': empresa
+    }
+    return render(request, 'update_funcionario.html', context)
+
+def update_funcionario(request, id):
+    if request.method == "POST":
+        nome = request.POST.get('nome')
+        email = request.POST.get('email')
+        empresa_id = request.POST.get('empresa')
+        empresa = Empresa.objects.get(id=empresa_id)
+
+        funcionario = Funcionario.objects.get(id=id)
+
+        funcionario.nome = nome
+        funcionario.email = email
+        funcionario.empresa = empresa
+
+        funcionario.save()
+        return redirect('funcionarios')
+
+def pagina_adicionar_funcionario(request):
+    empresas = Empresa.objects.all()
+    context = {
+        'emp': empresas
+    }
+    return render(request, 'add_funcionario.html', context)
