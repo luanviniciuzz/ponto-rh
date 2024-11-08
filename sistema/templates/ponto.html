@@ -21,10 +21,10 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h2>Gerenciar <b>Empresas</b></h2>
+						<h2>Gerenciar <b>Pontos</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="{% url 'pagina_adicionar_empresa' %}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Adicionar nova empresa</span></a>
+						<a href="{% url 'pagina_adicionar_ponto' %}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Bater ponto</span></a>
 						{% comment %} <a href="#deleteEmployeeModal" class="btn btn-danger"><i class="material-icons">&#xE15C;</i> <span>Deletar</span></a>						 {% endcomment %}
 					</div>
                 </div>
@@ -32,21 +32,17 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Endereço</th>
-						<th>Telefone</th>
+                        <th>Funcionário</th>
+                        <th>Entrada</th>
+						<th>Saída</th>
                     </tr>
                 </thead>
                 <tbody>
-                {%for i in emp%}
+                {%for p in pt%}
                     <tr>
-                        <td>{{i.nome}}</td>
-                        <td>{{i.endereco}}</td>
-						<td>{{i.telefone}}</td>
-                        <td>
-                            <a href="{% url 'editar_empresa' i.id %}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="{% url 'deletar_empresa' i.id %}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
+                        <td>{{p.funcionario.nome}}</td>
+                        <td>{{p.entrada}}</td>
+						<td>{{p.saida}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

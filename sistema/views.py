@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Empresa, Funcionario
+from .models import Empresa, Funcionario, Ponto
 
 def index(request):
     return render(request, 'index.html')
@@ -114,3 +114,32 @@ def pagina_adicionar_funcionario(request):
         'emp': empresas
     }
     return render(request, 'add_funcionario.html', context)
+
+## -------------------------------------
+
+def ponto(request):
+    pontos = Ponto.objects.all()
+    context = {
+        'pt': pontos
+    }
+    return render(request,'ponto.html' , context)
+
+def pagina_adicionar_ponto(request):
+    return render(request, 'add_ponto.html')
+
+def adicionar_ponto(request):
+    if request.method == "POST":
+        funcionario_email = request.POST.get('email')
+        entrada = request.POST.get('entrada')
+        saida = request.POST.get('saida')
+
+
+        funcionario = Funcionario.objects.get(email=funcionario_email)
+
+        Ponto.objects.create(
+            funcionario=funcionario,
+            entrada=entrada,
+            saida=saida
+        )
+
+        return redirect('ponto')

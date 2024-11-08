@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block title %}Ponto{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="col-md-4">
+    <form action="{% url 'adicionar_ponto' %}" method="post">
+        {% csrf_token %}
+        <div class="modal-header">						
+            <h4 class="modal-title">Bater ponto</h4>
+        </div>
+        <div class="modal-body">					
+            <div class="form-group">
+                <label>Funcionario</label>
+                <input name="email" type="text" class="form-control" value={{user.email}} readonly required>
+            </div>
+            <div class="form-group">
+                <label>Entrada</label>
+                <input name="entrada" type="datetime-local" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Saída</label>
+                <input name="saida" type="datetime-local" class="form-control" required>
+            </div>			
+        </div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+            <input type="submit" class="btn btn-success" value="Bater Ponto">
+        </div>
+    </form>		
+</div>
+{% endif %}
+{% endblock %}

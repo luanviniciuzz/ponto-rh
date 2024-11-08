@@ -1,6 +1,8 @@
 from django.urls import path
 from sistema.views import index, adicionar_empresa, empresas, pagina_adicionar_empresa, deletar_empresa, editar_empresa, update_empresa
 from sistema.views import funcionarios, pagina_adicionar_funcionario, adicionar_funcionario, deletar_funcionario, update_funcionario, editar_funcionario
+from sistema.views import ponto, pagina_adicionar_ponto, adicionar_ponto
+
 urlpatterns = [
     path('', index, name='mysite'),
     ## MODULO EMPRESAS
@@ -17,5 +19,8 @@ urlpatterns = [
     path('deletar_funcionario/<int:id>', deletar_funcionario, name='deletar_funcionario'),
     path('editar/funcionario/<int:id>', editar_funcionario, name='editar_funcionario'),
     path('update/funcionario/<int:id>', update_funcionario, name='update_funcionario'),
-
+    ## MODULO PONTO
+    path('ponto/', ponto, name='ponto'),
+    path('ponto/adicionar/', pagina_adicionar_ponto, name='pagina_adicionar_ponto'),
+    path('adicionar_ponto/', adicionar_ponto, name='adicionar_ponto'),
 ]
