@@ -135,13 +135,16 @@ def adicionar_ponto(request):
         entrada = request.POST.get('entrada')
         saida = request.POST.get('saida')
 
-
-        funcionario = Funcionario.objects.get(email=funcionario_email)
-
-        Ponto.objects.create(
-            funcionario=funcionario,
-            entrada=entrada,
-            saida=saida
-        )
+        try:
+            funcionario = Funcionario.objects.get(email=funcionario_email)
+            Ponto.objects.create(
+                funcionario=funcionario,
+                entrada=entrada,
+                saida=saida
+            )
+        except Funcionario.DoesNotExist:
+            print("Funcionário não trabalha em nenhuma empresa cadastrada.")
+        except Exception as e:
+            print(f"Ocorreu um erro: {e}")
 
         return redirect('ponto')
