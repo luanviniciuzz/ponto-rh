@@ -118,11 +118,13 @@ def pagina_adicionar_funcionario(request):
 ## -------------------------------------
 
 def ponto(request):
-    pontos = Ponto.objects.all()
+    usuario_email = request.user.email  
+    pontos = Ponto.objects.filter(funcionario__email=usuario_email)
+    
     context = {
         'pt': pontos
     }
-    return render(request,'ponto.html' , context)
+    return render(request, 'ponto.html', context)
 
 def pagina_adicionar_ponto(request):
     return render(request, 'add_ponto.html')
